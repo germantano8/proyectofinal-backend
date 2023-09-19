@@ -15,10 +15,14 @@ const db = new Sequelize(
 db.authenticate().then(() => {
     console.log('Connection has been established successfully.');
 }).catch(err => {
-    console.log(err);
+    console.log('Unable to connect to the database.');
 });
 
 const app = express();
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
