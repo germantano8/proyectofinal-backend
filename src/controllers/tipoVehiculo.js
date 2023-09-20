@@ -1,4 +1,3 @@
-const sequelize = require('../database/connection');
 const TipoVehiculo = require('../models/tipoVehiculo');
 
 const tipoVehiculoController = {
