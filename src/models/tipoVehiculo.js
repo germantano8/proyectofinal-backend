@@ -10,11 +10,15 @@ const tipoVehiculo = sequelize.define('tipo_vehiculo', {
     },
     descripcion: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        min: 3,
+        max: 45
     },
     tipo_licencia: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        min: 1,
+        max: 10
     }
     }, {
     timestamps: false,
