@@ -19,12 +19,12 @@ const verifyTipoVehiculo = async (req, res, next) => {
         errors.tipo_licencia = validator.isLength(req.body.tipo_licencia, {min: 1, max: 10}) && validator.isAlphanumeric(req.body.tipo_licencia) ? null : "El tipo de licencia debe ser alfanumérico y debe tener entre 1 y 10 caracteres";
 
         if(Object.entries(errors).some((e) => e[1] != null)){
-            res.status(400).json(errors);
+            return res.status(400).json(errors);
         }
 
         return next();
     }catch(err){
-        res.status(500).json({message: 'Error creating tipoVehiculo'});
+        return res.status(500).json({message: 'Error al crear la entidad'});
     }
 }
 
