@@ -1,9 +1,11 @@
 const tipoVehiculoController = require('./tipoVehiculo');
-const vehiculo = require('./vehiculo');
+const vehiculoController = require('./vehiculo');
+const conductorController = require('./conductor');
 
 const controllers = {
     tipoVehiculoController,
-    vehiculo
+    vehiculoController,
+    conductorController
 }
 
 module.exports = controllers;
