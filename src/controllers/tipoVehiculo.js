@@ -9,7 +9,7 @@ const tipoVehiculoController = {
 
             return res.status(200).json(await TipoVehiculo.findAll());
         }catch(err){
-            return res.status(500).json({error: 'Cannot retrieve data'});
+            return res.status(500).json({error: 'Error al recuperar los datos'});
         }
         
     },
@@ -22,7 +22,7 @@ const tipoVehiculoController = {
 
             return res.status(200).json(tipoVehiculo);
         }catch(err){
-            return res.status(500).json({error: 'Cannot retrieve data'});
+            return res.status(500).json({error: 'Error al recuperar los datos'});
         }
         
     },
@@ -35,7 +35,7 @@ const tipoVehiculoController = {
 
             return res.status(200).json(newTipoVehiculo);
         }catch(err){
-            return res.status(500).json({error: 'Error creating entity'});
+            return res.status(500).json({error: 'Error al crear la entidad'});
         }
     },
     update: async(req, res) => {
@@ -56,7 +56,7 @@ const tipoVehiculoController = {
 
             return res.status(200).json({message: 'Tipo de vehiculo actualizado'});
         }catch(err){
-            return res.status(500).json({error: 'Error updating entity'});
+            return res.status(500).json({error: 'Error al actualizar la entidad'});
         }
     },
     delete: async(req, res) => {
@@ -74,7 +74,7 @@ const tipoVehiculoController = {
 
             return res.status(200).json({message: 'Tipo de vehiculo eliminado'});
         }catch(err){
-            return res.status(500).json({error: 'Error deleting entity'});
+            return res.status(500).json({error: 'Error al eliminar la entidad'});
         }
     }
 }

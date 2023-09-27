@@ -1,8 +1,10 @@
-import tipoVehiculoController from "./tipoVehiculo";
-import conductorController from "./conductor";
+const tipoVehiculoController = require('./tipoVehiculo');
+const vehiculoController = require('./vehiculo');
+const conductorController = require('./conductor');
 
 const controllers = {
     tipoVehiculoController,
+    vehiculoController,
     conductorController
 }
 
