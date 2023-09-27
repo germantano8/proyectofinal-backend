@@ -1,7 +1,9 @@
 import tipoVehiculoController from "./tipoVehiculo";
+import conductorController from "./conductor";
 
 const controllers = {
-    tipoVehiculoController
+    tipoVehiculoController,
+    conductorController
 }
 
 module.exports = controllers;
