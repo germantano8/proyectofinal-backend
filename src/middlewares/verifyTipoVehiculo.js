@@ -20,11 +20,11 @@ const verifyTipoVehiculo = async (req, res, next) => {
 
         if(Object.entries(errors).some((e) => e[1] != null)){
             res.status(400).json(errors);
+        }else{
+            next();
         }
-
-        return next();
     }catch(err){
-        res.status(500).json({message: 'Error creating tipoVehiculo'});
+        res.status(500).json({message: 'Error al crear la entidad'});
     }
 }
 
