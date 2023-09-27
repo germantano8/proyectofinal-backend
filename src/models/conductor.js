@@ -6,8 +6,8 @@ const conductor = sequelize.define('conductor', {
         type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false,
-        min: 3,
-        max: 10
+        min: 8,
+        max: 8
     },
     fecha_nacimiento: {
         type: DataTypes.DATE,
@@ -35,5 +35,6 @@ const conductor = sequelize.define('conductor', {
     timestamps: false,
     freezeTableName:true,
     }
-    );
-    module.exports = conductor;
+);
+
+module.exports = conductor;
