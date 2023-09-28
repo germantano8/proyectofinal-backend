@@ -10,6 +10,7 @@ const service = sequelize.define('service', {
     },
     fecha: {
         type: DataTypes.DATE,
+        primaryKey: true,
         allowNull: false,
     },
     patente: {
@@ -20,7 +21,6 @@ const service = sequelize.define('service', {
     },
     kilometraje: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         allowNull: false
     },
     comentarios_ingreso: {

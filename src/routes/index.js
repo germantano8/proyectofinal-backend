@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const tipoVehiculo = require('./tipoVehiculo');
 const vehiculo = require('./vehiculo');
+const conductor = require('./conductor');
 const service = require('./service');
 
 router.use('/tipovehiculo', tipoVehiculo);
