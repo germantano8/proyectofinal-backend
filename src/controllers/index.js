@@ -1,7 +1,9 @@
 import tipoVehiculoController from "./tipoVehiculo";
+import proyectoController from "./proyecto";
 
 const controllers = {
-    tipoVehiculoController
+    tipoVehiculoController,
+    proyectoController
 }
 
 module.exports = controllers;
