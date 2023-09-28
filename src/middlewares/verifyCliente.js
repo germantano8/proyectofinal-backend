@@ -4,19 +4,19 @@ const validator = require('validator');
 const verifyCliente = async (req, res, next) => {
     try{
         const errors = {
-            descripcion: null,
-            tipo_licencia:null,
+            cuit: null,
+            razon_social:null,
         };
 
         if(req.method === 'PUT' || req.method === 'DELETE'){
             const clienteExists = await cliente.findByPk(req.params.id);
             if(!clienteExists){
-                return res.status(404).json({message: 'Tipo de vehiculo no encontrado'});
+                return res.status(404).json({message: 'Cliente no encontrado'});
             }
         }
 
-        errors.descripcion = validator.isAlpha(req.body.descripcion) && validator.isLength(req.body.descripcion, {min: 3, max: 45}) ? null : "La descripcion solo puede contener letras y debe tener entre 3 y 45 caracteres";
-        errors.tipo_licencia = validator.isLength(req.body.tipo_licencia, {min: 1, max: 10}) && validator.isAlphanumeric(req.body.tipo_licencia) ? null : "El tipo de licencia debe ser alfanumérico y debe tener entre 1 y 10 caracteres";
+        errors.cuit = validator.isLength(req.body.cuit, {min: 8, max: 15}) && validator.isAlphanumeric(req.body.cuit) ? null : "El cuit debe ser alfanumérico y debe tener entre 8 y 15 caracteres";
+        errors.razon_social = validator.isLength(req.body.razon_social, {min: 1, max: 45}) && validator.isAlphanumeric(req.body.razon_social) ? null : "La razon social debe ser alfanumérico y debe tener entre 1 y 45 caracteres";
 
         if(Object.entries(errors).some((e) => e[1] != null)){
             return res.status(400).json(errors);
