@@ -5,7 +5,7 @@ const serviceController = {
     getAll: async (req, res) => {
         try{
             const service = await Service.findAll();
-            if(!service) return res.status(400).json({error: 'No hay service'});
+            if(!service) return res.status(400).json({error: 'No hay Service'});
 
             return res.status(200).json(await Service.findAll());
         }catch(err){
@@ -29,8 +29,10 @@ const serviceController = {
     create: async(req, res) => {
         try{
             const newService = await Service.create({
-                descripcion: req.body.descripcion, 
-                tipo_licencia: req.body.tipo_licencia
+                patente: req.body.patente, 
+                kilometraje: req.body.kilometraje,
+                comentarios_ingreso: req.body.comentarios_ingreso, 
+                comentarios_salida: req.body.comentarios_salida 
             });
 
             return res.status(200).json(newService);
@@ -46,8 +48,10 @@ const serviceController = {
             if(!service) return res.status(404).json({error: 'Service no encontrado'});
 
             await Service.update({
-                descripcion: req.body.descripcion, 
-                tipo_licencia: req.body.tipo_licencia
+                patente: req.body.patente, 
+                kilometraje: req.body.kilometraje,
+                comentarios_ingreso: req.body.comentarios_ingreso, 
+                comentarios_salida: req.body.comentarios_salida 
             },{
                 where: {
                     id: req.params.id

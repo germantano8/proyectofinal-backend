@@ -6,33 +6,24 @@ const service = sequelize.define('service', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false
     },
-    fecha: {
-        type: DataTypes.DATE,
-        primaryKey: true,
-        allowNull: false,
-    },
+   // fecha: {
+   //     type: DataTypes.DATE,
+   // },
     patente: {
         type: DataTypes.STRING,
-        allowNull: false,
-        min: 1,
+        min: 6,
         max: 10
     },
     kilometraje: {
         type: DataTypes.INTEGER,
-        allowNull: false
     },
     comentarios_ingreso: {
         type: DataTypes.STRING,
-        allowNull: false,
-        min: 1,
         max: 100
     },
     comentarios_salida: {
         type: DataTypes.STRING,
-        allowNull: false,
-        min: 1,
         max: 100
     }
     }, {
