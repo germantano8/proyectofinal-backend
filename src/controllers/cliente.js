@@ -15,8 +15,8 @@ const clienteController = {
     },
     getOne: async(req, res) => {
         try{
-            if(!req.params.id) return res.status(400).json({error: 'Falta CUIT'});
-            const cliente = await Cliente.findByPk(req.params.id);
+            if(!req.params.cuit) return res.status(400).json({error: 'Falta CUIT'});
+            const cliente = await Cliente.findByPk(req.params.cuit);
 
             if(!cliente) return res.status(404).json({error: 'Cliente no encontrado'});
 
@@ -29,8 +29,8 @@ const clienteController = {
     create: async(req, res) => {
         try{
             const newCliente = await Cliente.create({
-                descripcion: req.body.descripcion, 
-                tipo_licencia: req.body.tipo_licencia
+                cuit:req.body.cuit,
+                razon_social: req.body.razon_social
             });
 
             return res.status(200).json(newCliente);
@@ -40,17 +40,16 @@ const clienteController = {
     },
     update: async(req, res) => {
         try{
-            if(!req.params.id) return res.status(400).json({error: 'Falta CUIT'});
-            const cliente = await Cliente.findByPk(req.params.id);
+            if(!req.params.cuit) return res.status(400).json({error: 'Falta CUIT'});
+            const cliente = await Cliente.findByPk(req.params.cuit);
 
             if(!cliente) return res.status(404).json({error: 'Cliente no encontrado'});
 
             await Cliente.update({
-                descripcion: req.body.descripcion, 
-                tipo_licencia: req.body.tipo_licencia
+                razon_social: req.body.razon_social
             },{
                 where: {
-                    id: req.params.id
+                    cuit: req.params.cuit
                 }
             });
 
@@ -61,14 +60,14 @@ const clienteController = {
     },
     delete: async(req, res) => {
         try{
-            if(!req.params.id) return res.status(400).json({error: 'Falta CUIT'});
-            const cliente = await Cliente.findByPk(req.params.id);
+            if(!req.params.cuit) return res.status(400).json({error: 'Falta CUIT'});
+            const cliente = await Cliente.findByPk(req.params.cuit);
 
             if(!cliente) return res.status(404).json({error: 'Cliente no encontrado'});
 
             await Cliente.destroy({
                 where: {
-                    id: req.params.id
+                    cuit: req.params.cuit
                 }
             });
 

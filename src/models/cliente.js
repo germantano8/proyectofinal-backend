@@ -7,11 +7,10 @@ const cliente = sequelize.define('cliente', {
         primaryKey: true,
         allowNull: false,
         min: 8,
-        max: 15
+        max: 13
     },
     razon_social: {
         type: DataTypes.STRING,
-        allowNull: false,
         min: 1,
         max: 45
     }
