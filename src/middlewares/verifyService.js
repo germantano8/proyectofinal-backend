@@ -7,8 +7,8 @@ const verifyService = async (req, res, next) => {
             //fecha:null,
             patente:null,
             kilometraje:null,
-            comentario_ingreso:null,
-            comentario_salida:null
+            comentarios_ingreso:null,
+            comentarios_salida:null
         };
 
         if(req.method === 'PUT' || req.method === 'DELETE'){
@@ -19,14 +19,12 @@ const verifyService = async (req, res, next) => {
         }
 
         //el ID no hay que validarlo ya que se genera e incrementa automaticamente
-        // errors.id = typeof(req.body.id) === 'number' ? null : "El año debe ser un número entre 1900 y 2025";
+        // errors.id = typeof(req.body.id) === 'number' ? null : "ID error";
  
-        //   errors.fecha = validator.isDate(req.body.fecha, { format: 'YYYY-MM-DD' }) ? null : "La fecha debe ser de formato: aaaa-mm-dd";
-    
-        //  errors.patente = validator.isLength(req.body.patente, {min: 6, max: 10}) && validator.isAlphanumeric(req.body.patente) ?  "La patente debe ser alfanumérica y debe tener entre 6 y 10 caracteres": "";
-        //  errors.kilometraje = typeof(req.body.kilometraje) === 'number' ? "Ingresar solo valores numericos para el kilometraje" : "";
-        // errors.comentario_ingreso = (validator.isAlpha(req.body.comentario_ingreso) && validator.isLength(req.body.comentario_ingreso, { max: 100 })) ? "" : "Los comentarios de salida solo pueden contener hasta 100 caracteres";
-        // errors.comentario_salida = (validator.isAlpha(req.body.comentario_salida) && validator.isLength(req.body.comentario_salida, { max: 100 })) ? "" : "Los comentarios de salida solo pueden contener hasta 100 caracteres";
+        errors.patente = typeof(req.body.patente) === 'string' && validator.isLength(req.body.patente, {min: 6, max: 10}) ? null : "La patente debe tener hasta 10 caracteres";
+        errors.kilometraje = typeof(req.body.kilometraje) === 'number' ? null :"Ingresar solo valores numericos para el kilometraje" ;
+        errors.comentarios_ingreso =  validator.isLength(req.body.comentarios_ingreso, {min: 1, max: 100}) ? null : "Los comentarios de ingreso solo pueden contener hasta 100 caracteres";
+        errors.comentarios_salida = typeof(req.body.comentarios_salida) === 'string' && validator.isLength(req.body.comentarios_salida, {min: 1, max: 100}) ? null : "Los comentarios de salida solo pueden contener hasta 100 caracteres";
 
         if(Object.entries(errors).some((e) => e[1] != null)){
             return res.status(400).json(errors);
