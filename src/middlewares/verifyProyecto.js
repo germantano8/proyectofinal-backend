@@ -17,14 +17,15 @@ const verifyProyecto = async (req, res, next) => {
             if(!proyectoExists){
                 return res.status(404).json({message: 'Proyecto no encontrado'});
             }
+            return next();
         }
 
         errors.ubicacion = typeof(req.body.ubicacion) === 'string' && validator.isLength(req.body.ubicacion, {min: 3, max: 45}) ? null : "La ubicacion solo puede contener letras y debe tener entre 3 y 45 caracteres";
         errors.nombre =  typeof(req.body.nombre) === 'string' && validator.isLength(req.body.nombre, {min: 1, max: 30}) ? null : "El nombre solo puede contener letras y debe tener entre 1 y 30 caracteres";
-        //errors.fecha_inicio = validator.isDate(Date.parse(req.body.fecha_inicio)) || typeof(req.body.fecha_inicio) === 'DATEONLY'? null : "La fecha de inicio debe ser una fecha válida.. ";
-        //errors.fecha_fin_estimada = validator.isDate(Date.parse(req.body.fecha_fin_estimada), { format: 'YYYY-MM-DD' }) && validator.isAfter(req.body.fecha_inicio)? null : "La fecha de fin estimada debe ser una fecha válida y posterior a la fecha de inicio. Formato: aaaa-mm-dd";
-        errors.observaciones = !req.body.observaciones ||validator.isLength(req.body.observaciones, {min: 1, max: 45}) ? null : "Las observaciones solo pueden contener letras y debe tener entre 1 y 45 caracteres";
-        errors.fecha_fin_real = !req.body.fecha_fin_real || validator.isDate(req.body.fecha_fin_real, { format: 'YYYY-MM-DD' }) && validator.isAfter(req.body.fecha_inicio)? null : "La fecha de fin real debe ser una fecha válida y posterior a la fecha de inicio. Formato: aaaa-mm-dd";
+        errors.fecha_inicio = validator.isISO8601(req.body.fecha_inicio) ? null : "La fecha de inicio debe ser una fecha válida";
+        errors.fecha_fin_estimada = validator.isISO8601(req.body.fecha_fin_estimada) && req.body.fecha_fin_estimada > req.body.fecha_inicio ? null : "La fecha de fin estimada debe ser una fecha válida y posterior a la fecha de inicio. Formato: aaaa-mm-dd";
+        errors.observaciones = !req.body.observaciones || validator.isLength(req.body.observaciones, {min: 1, max: 45}) ? null : "Las observaciones solo pueden contener letras y debe tener entre 1 y 45 caracteres";
+        errors.fecha_fin_real = !req.body.fecha_fin_real || (validator.isISO8601(req.body.fecha_fin_real) && req.body.fecha_fin_real > req.body.fecha_inicio) ? null : "La fecha de fin real debe ser una fecha válida y posterior a la fecha de inicio. Formato: aaaa-mm-dd";
 
         if(Object.entries(errors).some((e) => e[1] != null)){
            return res.status(400).json(errors);

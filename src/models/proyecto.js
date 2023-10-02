@@ -21,15 +21,15 @@ const proyecto = sequelize.define('proyecto', {
         max: 30
     },
     fecha_inicio: {
-        type: DataTypes.DATEONLY, //"YYYY-MM-DD"
+        type: DataTypes.DATE, //"YYYY-MM-DD"
         allowNull: false
     },
     fecha_fin_estimada: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false
     },
     fecha_fin_real: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: true
     },
     observaciones: {

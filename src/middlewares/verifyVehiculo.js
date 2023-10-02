@@ -17,6 +17,7 @@ const verifyVehiculo = async (req, res, next) => {
             if(!vehiculoExists){
                 return res.status(404).json({message: 'Vehiculo no encontrado'});
             }
+            return next();
         }
 
         errors.patente = validator.isLength(req.body.patente, {min: 6, max: 10}) && validator.isAlphanumeric(req.body.patente) ? null : "La patente debe ser alfanumérica y debe tener entre 6 y 10 caracteres";
