@@ -20,7 +20,7 @@ const reparacionController = {
 
             if(!reparacion) return res.status(404).json({error: 'Reparacion no encontrada'});
 
-            return res.status(200).json(proyecto);
+            return res.status(200).json(reparacion);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }
@@ -29,7 +29,7 @@ const reparacionController = {
     create: async(req, res) => {
         try{
             const newReparacion = await Reparacion.create({
-                comentarios: req.body.ubicacion, 
+                comentarios: req.body.comentarios, 
                 fecha_desde: req.body.fecha_desde,
                 fecha_hasta: req.body.fecha_hasta,
                 patente: req.body.patente
@@ -48,7 +48,7 @@ const reparacionController = {
             if(!reparacion) return res.status(404).json({error: 'Reparacion no encontrada'});
 
             await Reparacion.update({
-                comentarios: req.body.ubicacion, 
+                comentarios: req.body.comentarios, 
                 fecha_desde: req.body.fecha_desde,
                 fecha_hasta: req.body.fecha_hasta,
                 patente: req.body.patente
@@ -66,7 +66,7 @@ const reparacionController = {
     delete: async(req, res) => {
         try{
             if(!req.params.id) return res.status(400).json({error: 'Falta id'});
-            const reparacion = await Proyecto.findByPk(req.params.id);
+            const reparacion = await Reparacion.findByPk(req.params.id);
 
             if(!reparacion) return res.status(404).json({error: 'Reparacion no encontrada'});
 

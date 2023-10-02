@@ -18,7 +18,7 @@ const verifyReparacion = async (req, res, next) => {
             }
         }
 
-        errors.comentarios = typeof(req.body.ubicacion) === 'string' && validator.isLength(req.body.ubicacion, {min: 3, max: 45}) ? null : "Los comentarios deben tener entre 3 y 45 caracteres";
+        errors.comentarios = typeof(req.body.comentarios) === 'string' && validator.isLength(req.body.comentarios, {min: 3, max: 45}) ? null : "Los comentarios deben tener entre 3 y 45 caracteres";
         //errors.fecha_desde = validator.isDate(Date.parse(req.body.fecha_desde)) || typeof(req.body.fecha_desde) === 'DATEONLY'? null : "La fecha de inicio debe ser una fecha válida.. ";
         //errors.fecha_hasta = validator.isDate(Date.parse(req.body.fecha_hasta), { format: 'YYYY-MM-DD' }) && validator.isAfter(req.body.fecha_desde)? null : "La fecha de fin  debe ser una fecha válida y posterior a la fecha de inicio.";
 
@@ -35,7 +35,7 @@ const verifyReparacion = async (req, res, next) => {
 
         return next();
     }catch(err){
-        res.status(500).json({message: 'Error al crear la entidad'});
+       return res.status(500).json({message: 'Error al crear la entidad'});
     }
 }
 

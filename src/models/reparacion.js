@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../database/connection');
+const vehiculo = require('./vehiculo');
 
 const reparacion = sequelize.define('reparacion', {
     id: {
@@ -29,7 +30,7 @@ const reparacion = sequelize.define('reparacion', {
         min: 6,
         max: 10,
         references: {
-            model: Vehiculo,
+            model: vehiculo,
             key: 'patente'
         }
     },

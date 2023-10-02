@@ -32,7 +32,7 @@ const verifyProyecto = async (req, res, next) => {
 
         return next();
     }catch(err){
-        res.status(500).json({message: 'Error al crear la entidad'});
+      return  res.status(500).json({message: 'Error al crear la entidad'});
     }
 }
 

@@ -4,11 +4,14 @@ const conductor = require('./conductor');
 const vehiculo = require('./vehiculo');
 const proyecto = require('./proyecto');
 const reparacion = require('./reparacion');
+const trabajo = require('./trabajo');
+
 
 router.use('/tipovehiculo', tipoVehiculo);
 router.use('/vehiculo', vehiculo);
 router.use('/conductor', conductor);
 router.use('/proyecto', proyecto);
 router.use('/reparacion', reparacion);
+router.use('/trabajo', trabajo);
 
 module.exports = router;
