@@ -14,7 +14,7 @@ const verifyCliente = async (req, res, next) => {
             }
         }
 
-        errors.razon_social = validator.isAlpha(req.body.razon_social) && validator.isLength(req.body.razon_social, {min: 3, max: 45}) ? null : "La descripcion solo puede contener letras y debe tener entre 3 y 45 caracteres";
+        errors.razon_social = typeof(req.body.razon_social) === 'string' && validator.isLength(req.body.razon_social, {min: 3, max: 45}) ? null : "La descripcion solo puede contener letras y debe tener entre 3 y 45 caracteres";
 
         if(Object.entries(errors).some((e) => e[1] != null)){
             return res.status(400).json(errors);
