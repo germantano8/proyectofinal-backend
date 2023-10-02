@@ -11,6 +11,14 @@ const verifyconductor = async (req, res, next) => {
             licencias:null
         }
 
+        if(req.method === 'PUT' || req.method === 'DELETE'){
+            const proyectoExists = await proyecto.findByPk(req.params.id);
+            if(!proyectoExists){
+                return res.status(404).json({message: 'Proyecto no encontrado'});
+            }
+            return next();
+        }
+
         // Con el dni no estoy seguro porque es type string el campo pero deberían ser números (pero no integer el campo)
         errors.dni = typeof(req.body.dni) === 'string' && validator.isLength(req.body.dni, {min: 8, max: 8}) ? null : "El dni debe tener 8 caracteres";
         

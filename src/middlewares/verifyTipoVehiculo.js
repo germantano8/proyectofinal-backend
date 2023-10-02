@@ -13,6 +13,7 @@ const verifyTipoVehiculo = async (req, res, next) => {
             if(!tipoVehiculoExists){
                 return res.status(404).json({message: 'Tipo de vehiculo no encontrado'});
             }
+            return next();
         }
 
         errors.descripcion = validator.isAlpha(req.body.descripcion) && validator.isLength(req.body.descripcion, {min: 3, max: 45}) ? null : "La descripcion solo puede contener letras y debe tener entre 3 y 45 caracteres";
