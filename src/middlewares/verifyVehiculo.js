@@ -20,8 +20,8 @@ const verifyVehiculo = async (req, res, next) => {
             return next();
         }
 
-        errors.patente = validator.isLength(req.body.patente, {min: 6, max: 10}) && validator.isAlphanumeric(req.body.patente) ? null : "La patente debe ser alfanumérica y debe tener entre 6 y 10 caracteres";
-        errors.estado = validator.isIn(req.body.estado, ['disponible', 'en-obra', 'alquilada', 'mantenimiento']) && validator.isAlpha(req.body.estado) ? null : "El estado debe ser uno de los siguientes: disponible, en-obra, alquilada, mantenimiento";
+        errors.patente = validator.isLength(req.body.patente, {min: 6, max: 10}) && validator.isAlphanumeric(req.body.patente) ? null : "La patente debe ser alfanumérica y debe tener entre 6 y 10 caracteres (no incluir espacios).";
+        errors.estado = validator.isIn(req.body.estado, ['disponible', 'en-obra', 'alquilada', 'mantenimiento'])? null : "El estado debe ser uno de los siguientes: disponible, en-obra, alquilada, mantenimiento";
         errors.anio = typeof(req.body.anio) === 'number' && req.body.anio > 1900 && req.body.anio < 2025 ? null : "El año debe ser un número entre 1900 y 2025";
         errors.kilometraje = typeof(req.body.kilometraje) === 'number' && req.body.kilometraje > 0 ? null : "El kilometraje debe ser un número mayor que 0";
         
