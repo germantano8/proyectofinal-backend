@@ -4,7 +4,7 @@ const validator = require('validator');
 const verifyService = async (req, res, next) => {
     try{
         const errors = {
-            //fecha:null,
+            fecha:null,
             patente:null,
             kilometraje:null,
             comentarios_ingreso:null,
@@ -18,9 +18,7 @@ const verifyService = async (req, res, next) => {
             }
         }
 
-        //el ID no hay que validarlo ya que se genera e incrementa automaticamente
-        // errors.id = typeof(req.body.id) === 'number' ? null : "ID error";
- 
+        errors.fecha = validator.isISO8601(req.body.fecha)? null : "La fecha del Service debe ser una fecha válida. Formato: aaaa-mm-dd";
         errors.patente = typeof(req.body.patente) === 'string' && validator.isLength(req.body.patente, {min: 6, max: 10}) ? null : "La patente debe tener hasta 10 caracteres";
         errors.kilometraje = typeof(req.body.kilometraje) === 'number' ? null :"Ingresar solo valores numericos para el kilometraje" ;
         errors.comentarios_ingreso =  validator.isLength(req.body.comentarios_ingreso, {min: 1, max: 100}) ? null : "Los comentarios de ingreso solo pueden contener hasta 100 caracteres";
@@ -32,7 +30,7 @@ const verifyService = async (req, res, next) => {
 
         return next();
     }catch(err){
-        return res.status(500).json({message: 'Error al crear la entidad(verifyService.js)'});
+        return res.status(500).json({message: 'Error al crear la entidad'});
     }
 }
 

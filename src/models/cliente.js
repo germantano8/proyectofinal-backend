@@ -6,8 +6,8 @@ const cliente = sequelize.define('cliente', {
         type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false,
-        min: 8,
-        max: 13
+        min: 11,
+        max: 11
     },
     razon_social: {
         type: DataTypes.STRING,

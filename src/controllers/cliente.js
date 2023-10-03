@@ -46,7 +46,8 @@ const clienteController = {
             if(!cliente) return res.status(404).json({error: 'Cliente no encontrado'});
 
             await Cliente.update({
-                razon_social: req.body.razon_social
+                razon_social: req.body.razon_social,
+                cuit: req.body.cuit
             },{
                 where: {
                     cuit: req.params.cuit

@@ -10,7 +10,7 @@ const conductor = sequelize.define('conductor', {
         max: 8
     },
     fecha_nacimiento: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
     },
     nombre: {

@@ -25,8 +25,8 @@ const verifyTrabajo = async (req, res, next) => {
         }
 
         errors.kilometraje = typeof(req.body.kilometraje) === 'number' && req.body.kilometraje > 0 ? null : "El kilometraje debe ser un número mayor que 0";
-        //errors.fecha_desde = validator.isDate(Date.parse(req.body.fecha_desde)) || typeof(req.body.fecha_desde) === 'DATEONLY'? null : "La fecha de inicio debe ser una fecha válida.. ";
-        //errors.fecha_hasta = validator.isDate(Date.parse(req.body.fecha_hasta), { format: 'YYYY-MM-DD' }) && validator.isAfter(req.body.fecha_desde)? null : "La fecha de fin  debe ser una fecha válida y posterior a la fecha de inicio.";
+        errors.fecha_desde = validator.isISO8601(req.body.fecha_desde)? null : "La fecha de inicio del trabajo debe ser una fecha válida.. ";
+        errors.fecha_hasta = validator.isISO8601(req.body.fecha_hasta) && req.body.fecha_hasta > req.body.fecha_desde? null : "La fecha de fin del trabajo debe ser una fecha válida y posterior a la fecha de inicio.";
 
         if(typeof(req.body.patente === 'string')){
             const patenteExists = await vehiculo.findByPk(req.body.patente);

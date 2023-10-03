@@ -4,7 +4,8 @@ const validator = require('validator');
 const verifyCliente = async (req, res, next) => {
     try{
         const errors = {
-            razon_social:null
+            razon_social:null,
+            cuit:null
         };
 
         if(req.method === 'PUT' || req.method === 'DELETE'){
@@ -15,6 +16,7 @@ const verifyCliente = async (req, res, next) => {
         }
 
         errors.razon_social = typeof(req.body.razon_social) === 'string' && validator.isLength(req.body.razon_social, {min: 3, max: 45}) ? null : "La descripcion solo puede contener letras y debe tener entre 3 y 45 caracteres";
+        errors.cuit = validator.isNumeric(req.body.cuit) && validator.isLength(req.body.cuit, {min: 11, max: 11}) ? null : "El cuit debe tener 11 numeros";
 
         if(Object.entries(errors).some((e) => e[1] != null)){
             return res.status(400).json(errors);

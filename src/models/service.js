@@ -7,9 +7,9 @@ const service = sequelize.define('service', {
         primaryKey: true,
         autoIncrement: true,
     },
-   // fecha: {
-   //     type: DataTypes.DATE,
-   // },
+   fecha: {
+        type: DataTypes.DATEONLY,
+    },
     patente: {
         type: DataTypes.STRING,
         min: 6,
