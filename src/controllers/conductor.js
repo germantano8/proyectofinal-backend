@@ -15,8 +15,8 @@ const conductorController = {
     },
     getOne: async(req, res) => {
         try{
-            if(!req.params.id) return res.status(400).json({error: 'Falta dni'});
-            const conductor = await Conductor.findByPk(req.params.id);
+            if(!req.params.dni) return res.status(400).json({error: 'Falta dni'});
+            const conductor = await Conductor.findByPk(req.params.dni);
 
             if(!conductor) return res.status(404).json({error: 'Conductor no encontrado'});
 
@@ -43,8 +43,8 @@ const conductorController = {
     },
     update: async(req, res) => {
         try{
-            if(!req.params.id) return res.status(400).json({error: 'Falta dni'});
-            const conductor = await Conductor.findByPk(req.params.id);
+            if(!req.params.dni) return res.status(400).json({error: 'Falta dni'});
+            const conductor = await Conductor.findByPk(req.params.dni);
 
             if(!conductor) return res.status(404).json({error: 'Conductor no encontrado'});
 
@@ -56,7 +56,7 @@ const conductorController = {
                 licencias: req.body.licencias
             },{
                 where: {
-                    dni: req.params.id
+                    dni: req.params.dni
                 }
             });
 
@@ -67,14 +67,14 @@ const conductorController = {
     },
     delete: async(req, res) => {
         try{
-            if(!req.params.id) return res.status(400).json({error: 'Falta dni'});
-            const conductor = await Conductor.findByPk(req.params.id);
+            if(!req.params.dni) return res.status(400).json({error: 'Falta dni'});
+            const conductor = await Conductor.findByPk(req.params.dni);
 
             if(!conductor) return res.status(404).json({error: 'Conductor no encontrado'});
 
             await Conductor.destroy({
                 where: {
-                    dni: req.params.id
+                    dni: req.params.dni
                 }
             });
 
