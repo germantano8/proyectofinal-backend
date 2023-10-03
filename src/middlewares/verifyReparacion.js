@@ -19,9 +19,9 @@ const verifyReparacion = async (req, res, next) => {
             return next();
         }
 
-        errors.comentarios = typeof(req.body.comentarios) === 'string' && validator.isLength(req.body.ubicacion, {min: 3, max: 45}) ? null : "Los comentarios deben tener entre 3 y 45 caracteres";
-        errors.fecha_desde = (req.body.fecha_desde === null || !validator.isISO8601(req.body.fecha_desde)) ? "La fecha de inicio debe ser una fecha válida" : null;
-        errors.fecha_hasta = (req.body.fecha_hasta === null || !validator.isISO8601(req.body.fecha_hasta) || req.body.fecha_hasta <= req.body.fecha_desde) ? "La fecha de fin debe ser una fecha válida y posterior a la fecha de inicio." : null;
+        errors.comentarios = typeof(req.body.comentarios) === 'string' && validator.isLength(req.body.comentarios, {min: 3, max: 45}) ? null : "Los comentarios deben tener entre 3 y 45 caracteres";
+        errors.fecha_desde = validator.isISO8601(req.body.fecha_desde) ? null :  "La fecha de inicio debe ser una fecha válida" ;
+        errors.fecha_hasta = validator.isISO8601(req.body.fecha_hasta) && req.body.fecha_hasta > req.body.fecha_desde ? null : "La fecha de fin debe ser una fecha válida y posterior a la fecha de inicio.";
 
         if(typeof(req.body.patente === 'string')){
             const patenteExists = await vehiculo.findByPk(req.body.patente);

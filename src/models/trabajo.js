@@ -9,7 +9,8 @@ const trabajo = sequelize.define('trabajo', {
     id_trabajo:{
         type: DataTypes.INTEGER,
         primaryKey: true,
-        allowNull: false
+        allowNull: false,
+        autoIncrement: true
     },
     fecha_desde: {
         type: DataTypes.DATEONLY, 
