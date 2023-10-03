@@ -32,7 +32,8 @@ const serviceController = {
                 patente: req.body.patente, 
                 kilometraje: req.body.kilometraje,
                 comentarios_ingreso: req.body.comentarios_ingreso, 
-                comentarios_salida: req.body.comentarios_salida 
+                comentarios_salida: req.body.comentarios_salida,
+                fecha: req.body.fecha
             });
 
             return res.status(200).json(newService);
@@ -51,7 +52,8 @@ const serviceController = {
                 patente: req.body.patente, 
                 kilometraje: req.body.kilometraje,
                 comentarios_ingreso: req.body.comentarios_ingreso, 
-                comentarios_salida: req.body.comentarios_salida 
+                comentarios_salida: req.body.comentarios_salida,
+                fecha: req.body.fecha 
             },{
                 where: {
                     id: req.params.id
