@@ -7,6 +7,7 @@ const proyectoController = require('./proyecto');
 const reparacionController = require('./reparacion');
 const proyectoController = require('./proyecto');
 const trabajoController = require('./trabajo');
+const usuarioController = require('./usuario');
 
 const controllers = {
     tipoVehiculoController,
@@ -17,7 +18,8 @@ const controllers = {
     proyectoController,
     reparacionController,
     proyectoController,
-    trabajoController
+    trabajoController,
+    usuarioController
 }
 
 module.exports = controllers;

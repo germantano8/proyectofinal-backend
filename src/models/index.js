@@ -6,6 +6,7 @@ const service = require('./service');
 const proyecto = require('./proyecto');
 const reparacion = require('./reparacion');
 const trabajo = require('./trabajo');
+const usuario = require('./usuario');
 
 module.exports = {
     tipoVehiculo,
@@ -15,5 +16,6 @@ module.exports = {
     service,
     proyecto,
     reparacion,
-    trabajo
+    trabajo,
+    usuario
 }

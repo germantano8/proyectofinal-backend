@@ -1,13 +1,17 @@
-# proyectofinal-backend
-Index --> dependencias *(no hay que tocar nada )
-    importa todo y levanta el server . 
+# Proyecto Final ISI UTN  - Backend
 
-databas --> conexion con DB 
+ControlMaq es una plataforma dedicada a la gestión de maquinaria dentro de una constructora. Aborda el control y seguimiento del mantenimiento, administración del uso, y métricas de cada máquina tanto en proyectos propios como para su alquiler.
 
-Mcontrollers :
-    index --> unifica las etidad cargadas en models 
-    models --> definicion de cada entidad 
+## Como instalar
 
-mildware --> validaciones entre lo que llega y mandas 
+Clonar el repositorio
+Correr npm install en la terminal
+Correr npm start en la terminal
 
+## Alumnos
 
+Nombre | Legajo
+:--- | ---: |
+Germán Tano | 46873
+Candela Poratti | 47072
+Angelina Bazzi | 46316
