@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 require('dotenv').config();
 require('./src/database/connection');
 
@@ -14,7 +13,6 @@ module.exports = class App{
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(cors());
-        this.app.use(cookieParser());
         this.app.use('/api', routes);
     }
     
