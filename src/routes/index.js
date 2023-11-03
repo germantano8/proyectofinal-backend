@@ -1,22 +1,24 @@
 const router = require('express').Router();
-const tipoVehiculo = require('./tipoVehiculo');
-const conductor = require('./conductor');
-const vehiculo = require('./vehiculo');
-const cliente = require('./cliente');
-const service = require('./service');
-const proyecto = require('./proyecto');
-const reparacion = require('./reparacion');
-const trabajo = require('./trabajo');
-const usuario = require('./usuario');
+const auth = require('../middlewares/auth');
 
-router.use('/tipovehiculo', tipoVehiculo);
-router.use('/vehiculo', vehiculo);
-router.use('/conductor', conductor);
-router.use('/cliente', cliente);
-router.use('/service', service);
-router.use('/proyecto', proyecto);
-router.use('/reparacion', reparacion)
-router.use('/trabajo', trabajo);
+// Usuario está separado porque sí debe ser accesible sin autenticación
+const usuario = require('./usuario');
 router.use('/usuario', usuario);
+
+// Todas las rutas a partir de acá deben pasar por el middleware de autenticación
+const rutas = {
+    tipoVehiculo: require('./tipoVehiculo'),
+    conductor: require('./conductor'),
+    vehiculo: require('./vehiculo'),
+    cliente: require('./cliente'),
+    service: require('./service'),
+    proyecto: require('./proyecto'),
+    reparacion: require('./reparacion'),
+    trabajo: require('./trabajo'),
+}
+
+for (r in rutas){
+    router.use(`/${r}`, auth, rutas[r]);
+}
 
 module.exports = router;
