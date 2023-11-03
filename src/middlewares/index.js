@@ -1,21 +1,13 @@
-import verifyTipoVehiculo from "./verifyTipoVehiculo";
-import verifyVehiculo from "./verifyVehiculo";
-import verifyConductor from "./verifyConductor";
-import verifyCliente from "./verifyCliente";
-import verifyService from "./verifyService";
-import verifyProyecto from "./verifyProyecto";
-import verifyReparacion from "./verifyReparacion";
-import verifyTrabajo from "./verifyTrabajo";
-
 const verifiers = {
-    verifyTipoVehiculo,
-    verifyVehiculo,
-    verifyConductor,
-    verifyCliente,
-    verifyService,
-    verifyProyecto,
-    verifyReparacion,
-    verifyTrabajo
+    auth: require('./auth'),
+    verifyTipoVehiculo: require('./verifyTipoVehiculo'),
+    verifyVehiculo: require('./verifyVehiculo'),
+    verifyConductor: require('./verifyConductor'),
+    verifyCliente: require('./verifyCliente'),
+    verifyService: require('./verifyService'),
+    verifyProyecto: require('./verifyProyecto'),
+    verifyReparacion: require('./verifyReparacion'),
+    verifyTrabajo: require('./verifyTrabajo')
 }
 
 module.exports = verifiers;
