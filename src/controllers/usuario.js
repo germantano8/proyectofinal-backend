@@ -51,7 +51,7 @@ const usuarioController = {
 
             if(!isValid) return res.status(401).json({error: 'Contraseña incorrecta'});
 
-            payload = {
+            let payload = {
                 nombre: usuario.nombre,
                 password: usuario.password
             }

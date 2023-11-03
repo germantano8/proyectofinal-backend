@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const clienteController = require('../controllers/cliente');
 const verifyCliente = require('../middlewares/verifyCliente');
-const auth = require('../middlewares/auth');
 
 router.get('/', clienteController.getAll);
 router.get('/:cuit', clienteController.getOne);

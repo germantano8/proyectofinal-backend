@@ -17,7 +17,7 @@ const rutas = {
     trabajo: require('./trabajo'),
 }
 
-for (r in rutas){
+for (let r in rutas){
     router.use(`/${r}`, auth, rutas[r]);
 }
 
