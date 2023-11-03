@@ -15,7 +15,7 @@ module.exports = class App{
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(cors());
         this.app.use(cookieParser());
-        this.app.use('/api', routes)
+        this.app.use('/api', routes);
     }
     
     listen(){
