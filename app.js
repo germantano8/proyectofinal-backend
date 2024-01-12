@@ -10,10 +10,12 @@ module.exports = class App{
         this.port = port;
         this.routes = routes;
         this.app = express();
-
+        
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
-        this.app.use(cors());
+
+        this.app.use(cors({ credentials: true, origin: true }));
+
         this.app.use(cookieParser());
         this.app.use('/api', routes);
     }
