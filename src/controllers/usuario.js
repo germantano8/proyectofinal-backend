@@ -59,7 +59,12 @@ const usuarioController = {
             const key = process.env.SECRET_KEY;
             const token = jwt.sign(payload, key, {expiresIn: '2h'})
 
-            res.cookie('token', token, {httpOnly: false, secure:false, maxAge: 1000 * 60 * 60 * 2});
+            res.cookie('token', token, {
+                httpOnly: true, 
+                secure:true,
+                sameSite:'none',
+                domain:'http://localhost:3700',
+                maxAge: 1000 * 60 * 60 * 2});
 
             return res.status(200).send({token});
         }catch(err){
