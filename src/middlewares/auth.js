@@ -1,15 +1,17 @@
 const jwt = require('jsonwebtoken');
 
 const auth = (req, res, next) => {
-    try{
-        res.header("Access-Control-Allow-Origin");
-        res.header(
-            "Access-Control-Allow-Headers",
-            "Origin, X-Requested-With, Content-Type, Accept"
-        );
-        req.user = jwt.verify(token, process.env.SECRET_KEY);
 
+    res.header("Access-Control-Allow-Origin");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+
+    try{
         const token = req.cookies['token'] ? req.cookies['token'] : null;
+
+        req.user = jwt.verify(token, process.env.SECRET_KEY);
         
         return next();
     }catch(err){
