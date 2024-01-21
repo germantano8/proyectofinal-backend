@@ -1,13 +1,21 @@
+const { tipoVehiculo } = require('../models');
 const Vehiculo = require('../models/vehiculo');
 
 const vehiculoController = {
 
     getAll: async (req, res) => {
         try{
-            const vehiculo = await Vehiculo.findAll();
+            const vehiculo = await Vehiculo.findAll({
+                include: {
+                    model: tipoVehiculo,
+                    required:true,
+                    attributes: ['descripcion']
+                }
+            });
+
             if(!vehiculo) return res.status(400).json({error: 'No hay vehiculos'});
 
-            return res.status(200).json(await Vehiculo.findAll());
+            return res.status(200).json(vehiculo);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }
@@ -15,7 +23,13 @@ const vehiculoController = {
     getOne: async(req, res) => {
         try{
             if(!req.params.id) return res.status(400).json({error: 'Falta patente'});
-            const vehiculo = await Vehiculo.findByPk(req.params.id);
+            const vehiculo = await Vehiculo.findByPk(req.params.id, {
+                include: {
+                    model: tipoVehiculo,
+                    required:true,
+                    attributes: ['descripcion']
+                }
+            });
 
             if(!vehiculo) return res.status(404).json({error: 'Vehiculo no encontrado'});
 

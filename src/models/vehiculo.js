@@ -38,7 +38,10 @@ const vehiculo = sequelize.define('vehiculo', {
     }, {
     timestamps: false,
     freezeTableName:true,
-    }
+    },
 );
+
+vehiculo.belongsTo(tipoVehiculo, {foreignKey: 'id_tipo_vehiculo'});
+tipoVehiculo.hasMany(vehiculo, {foreignKey: 'id_tipo_vehiculo'});
 
 module.exports = vehiculo;
