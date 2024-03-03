@@ -7,7 +7,7 @@ const trabajoController = {
             const trabajo = await Trabajo.findAll();
             if(!trabajo) return res.status(400).json({error: 'No hay trabajos'});
 
-            return res.status(200).json(await Trabajo.findAll());
+            return res.status(200).json(trabajo);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }

@@ -22,6 +22,9 @@ const verifyTrabajo = async (req, res, next) => {
             if(!trabajoExists){
                 return res.status(404).json({message: 'Trabajo no encontrado'});
             }
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
         errors.kilometraje = typeof(req.body.kilometraje) === 'number' && req.body.kilometraje > 0 ? null : "El kilometraje debe ser un número mayor que 0";

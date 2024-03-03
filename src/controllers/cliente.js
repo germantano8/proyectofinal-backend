@@ -4,10 +4,14 @@ const clienteController = {
 
     getAll: async (req, res) => {
         try{
-            const cliente = await Cliente.findAll();
+            const cliente = await Cliente.findAll({
+                order: [
+                    ['razon_social', 'ASC']
+                ]
+            });
             if(!cliente) return res.status(400).json({error: 'No hay clientes'});
 
-            return res.status(200).json(await Cliente.findAll());
+            return res.status(200).json(cliente);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }

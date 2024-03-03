@@ -7,7 +7,7 @@ const proyectoController = {
             const proyecto = await Proyecto.findAll();
             if(!proyecto) return res.status(400).json({error: 'No hay proyectos'});
 
-            return res.status(200).json(await Proyecto.findAll());
+            return res.status(200).json(proyecto);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }

@@ -17,6 +17,9 @@ const verifyService = async (req, res, next) => {
             if(!serviceExists){
                 return res.status(404).json({message: 'Service no encontrado'});
             }
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
         errors.fecha = validator.isISO8601(req.body.fecha)? null : "La fecha del Service debe ser una fecha válida. Formato: aaaa-mm-dd";

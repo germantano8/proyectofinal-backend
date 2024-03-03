@@ -13,6 +13,9 @@ const verifyUsuario = async(req, res, next) => {
             if(!usuarioExists){
                 return res.status(404).json({message: 'Usuario no encontrado'});
             }
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
         errors.nombre = validator.isLength(req.body.nombre, {min: 3, max: 10}) ? null : "El nombre debe tener entre 3 y 10 caracteres";

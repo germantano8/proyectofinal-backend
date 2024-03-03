@@ -16,7 +16,9 @@ const verifyReparacion = async (req, res, next) => {
             if(!reparacionExists){
                 return res.status(404).json({message: 'Reparacion no encontrada'});
             }
-            return next();
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
         errors.comentarios = typeof(req.body.comentarios) === 'string' && validator.isLength(req.body.comentarios, {min: 3, max: 45}) ? null : "Los comentarios deben tener entre 3 y 45 caracteres";

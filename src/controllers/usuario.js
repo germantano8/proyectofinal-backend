@@ -9,7 +9,7 @@ const usuarioController = {
             const usuario = await Usuario.findAll();
             if(!usuario) return res.status(400).json({error: 'No hay usuarios'});
 
-            return res.status(200).json(await Usuario.findAll());
+            return res.status(200).json(usuario);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }
