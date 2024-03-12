@@ -14,7 +14,7 @@ const trabajo = sequelize.define('trabajo', {
     },
     fecha_desde: {
         type: DataTypes.DATEONLY, 
-        allowNull: true
+        allowNull: false
     },
     fecha_hasta: {
         type: DataTypes.DATEONLY, 
@@ -38,7 +38,7 @@ const trabajo = sequelize.define('trabajo', {
     },
     id_proyecto: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
             model: proyecto,
             key: 'id'
@@ -56,7 +56,7 @@ const trabajo = sequelize.define('trabajo', {
     },
     cuit_cliente: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         min: 11,
         max: 11,
         references: {
