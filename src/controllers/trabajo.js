@@ -4,7 +4,11 @@ const trabajoController = {
 
     getAll: async (req, res) => {
         try{
-            const trabajo = await Trabajo.findAll();
+            const trabajo = await Trabajo.findAll({
+                order: [
+                    ['id_trabajo', 'ASC']
+                ]
+            });
             if(!trabajo) return res.status(400).json({error: 'No hay trabajos'});
 
             return res.status(200).json(trabajo);

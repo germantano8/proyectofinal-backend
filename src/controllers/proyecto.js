@@ -4,7 +4,11 @@ const proyectoController = {
 
     getAll: async (req, res) => {
         try{
-            const proyecto = await Proyecto.findAll();
+            const proyecto = await Proyecto.findAll({
+                order: [
+                    ['ID', 'ASC']
+                ]
+            });
             if(!proyecto) return res.status(400).json({error: 'No hay proyectos'});
 
             return res.status(200).json(proyecto);
@@ -15,7 +19,7 @@ const proyectoController = {
     },
     getOne: async(req, res) => {
         try{
-            if(!req.params.id) return res.status(400).json({error: 'Falta id'});
+            if(!req.params.id) return res.status(200).json({error: 'Falta id'});
             const proyecto = await Proyecto.findByPk(req.params.id);
 
             if(!proyecto) return res.status(404).json({error: 'Proyecto no encontrado'});
