@@ -38,7 +38,7 @@ const verifyTrabajo = async (req, res, next) => {
             errors.patente = "Patente inválida";
         }
 
-        if (req.body.id_proyecto === null || typeof(parseInt(req.body.id_proyecto)) === 'number') {
+        if (typeof(parseInt(req.body.id_proyecto)) === 'number') {
             if (req.body.id_proyecto !== null) {
                 const id_proyectoExists = await proyecto.findByPk(req.body.id_proyecto);
                 errors.id_proyecto = id_proyectoExists ? null : "El proyecto no existe";
