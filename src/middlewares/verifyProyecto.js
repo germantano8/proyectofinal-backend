@@ -17,7 +17,9 @@ const verifyProyecto = async (req, res, next) => {
             if(!proyectoExists){
                 return res.status(404).json({message: 'Proyecto no encontrado'});
             }
-            return next();
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
         errors.ubicacion = typeof(req.body.ubicacion) === 'string' && validator.isLength(req.body.ubicacion, {min: 3, max: 45}) ? null : "La ubicacion solo puede contener letras y debe tener entre 3 y 45 caracteres";

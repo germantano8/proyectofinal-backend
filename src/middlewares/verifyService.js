@@ -17,10 +17,13 @@ const verifyService = async (req, res, next) => {
             if(!serviceExists){
                 return res.status(404).json({message: 'Service no encontrado'});
             }
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
         errors.fecha = validator.isISO8601(req.body.fecha)? null : "La fecha del Service debe ser una fecha válida. Formato: aaaa-mm-dd";
-        errors.kilometraje = typeof(req.body.kilometraje) === 'number' ? null :"Ingresar solo valores numericos para el kilometraje" ;
+        errors.kilometraje = typeof(parseInt(req.body.kilometraje)) === 'number' ? null :"Ingresar solo valores numericos para el kilometraje" ;
         errors.comentarios_ingreso = (req.body.comentarios_ingreso === null || validator.isLength(req.body.comentarios_ingreso, {min: 1, max: 100})) ? null : "Los comentarios de ingreso solo pueden contener hasta 100 caracteres";
         errors.comentarios_salida = (req.body.comentarios_salida === null || (typeof req.body.comentarios_salida === 'string' && validator.isLength(req.body.comentarios_salida, {min: 1, max: 100}))) ? null : "Los comentarios de salida solo pueden contener hasta 100 caracteres";
 

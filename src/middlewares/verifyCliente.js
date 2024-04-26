@@ -13,6 +13,9 @@ const verifyCliente = async (req, res, next) => {
             if(!clienteExists){
                 return res.status(404).json({message: 'Cliente no encontrado'});
             }
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
         errors.razon_social = typeof(req.body.razon_social) === 'string' && validator.isLength(req.body.razon_social, {min: 3, max: 45}) ? null : "La descripcion solo puede contener letras y debe tener entre 3 y 45 caracteres";

@@ -17,7 +17,9 @@ const verifyVehiculo = async (req, res, next) => {
             if(!vehiculoExists){
                 return res.status(404).json({message: 'Vehiculo no encontrado'});
             }
-            return next();
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
         errors.patente = validator.isLength(req.body.patente, {min: 6, max: 10}) && validator.isAlphanumeric(req.body.patente) ? null : "La patente debe ser alfanumérica y debe tener entre 6 y 10 caracteres (no incluir espacios).";
@@ -25,7 +27,7 @@ const verifyVehiculo = async (req, res, next) => {
         errors.anio = typeof(req.body.anio) === 'number' && req.body.anio > 1900 && req.body.anio < 2025 ? null : "El año debe ser un número entre 1900 y 2025";
         errors.kilometraje = typeof(req.body.kilometraje) === 'number' && req.body.kilometraje > 0 ? null : "El kilometraje debe ser un número mayor que 0";
         
-        if(typeof(req.body.id_tipo_vehiculo === 'number')){
+        if(typeof(parseInt(req.body.id_tipo_vehiculo) === 'number')){
             const tipoVehiculoExists = await TipoVehiculo.findByPk(req.body.id_tipo_vehiculo);
             errors.id_tipo_vehiculo = tipoVehiculoExists ? null : "El tipo de vehiculo no existe";
         }else{

@@ -7,7 +7,7 @@ const tipoVehiculoController = {
             const tipoVehiculo = await TipoVehiculo.findAll();
             if(!tipoVehiculo) return res.status(400).json({error: 'No hay tipos de vehiculo'});
 
-            return res.status(200).json(await TipoVehiculo.findAll());
+            return res.status(200).json(tipoVehiculo);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }

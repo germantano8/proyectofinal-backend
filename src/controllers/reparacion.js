@@ -7,7 +7,7 @@ const reparacionController = {
             const reparacion = await Reparacion.findAll();
             if(!reparacion) return res.status(400).json({error: 'No hay reparaciones'});
 
-            return res.status(200).json(await Reparacion.findAll());
+            return res.status(200).json(reparacion);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }

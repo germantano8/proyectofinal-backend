@@ -7,7 +7,7 @@ const conductorController = {
             const conductor = await Conductor.findAll();
             if(!conductor) return res.status(400).json({error: 'No hay conductores'});
 
-            return res.status(200).json(await Conductor.findAll());
+            return res.status(200).json(conductor);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }

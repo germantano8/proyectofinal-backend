@@ -12,7 +12,7 @@ const vehiculo = sequelize.define('vehiculo', {
     },
     estado:{
         type: DataTypes.ENUM('disponible', 'en-obra', 'alquilada', 'mantenimiento'),
-        allowNull: false,
+        allowNull: true,
         defaultValue: 'disponible',
     },
     anio:{

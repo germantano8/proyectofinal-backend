@@ -14,7 +14,7 @@ const trabajo = sequelize.define('trabajo', {
     },
     fecha_desde: {
         type: DataTypes.DATEONLY, 
-        allowNull: true
+        allowNull: false
     },
     fecha_hasta: {
         type: DataTypes.DATEONLY, 

@@ -16,7 +16,9 @@ const verifyConductor = async (req, res, next) => {
             if(!conductorExists){
                 return res.status(404).json({message: 'Conductor no encontrado'});
             }
-            return next();
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
         errors.dni = validator.isNumeric(req.body.dni) && validator.isLength(req.body.dni, {min: 8, max: 8}) ? null : "El dni debe tener 8 caracteres";

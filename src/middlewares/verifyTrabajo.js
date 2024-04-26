@@ -22,9 +22,12 @@ const verifyTrabajo = async (req, res, next) => {
             if(!trabajoExists){
                 return res.status(404).json({message: 'Trabajo no encontrado'});
             }
+            if(req.method === 'DELETE'){
+                return next();
+            }
         }
 
-        errors.kilometraje = typeof(req.body.kilometraje) === 'number' && req.body.kilometraje > 0 ? null : "El kilometraje debe ser un número mayor que 0";
+        errors.kilometraje = typeof(parseInt(req.body.kilometraje)) === 'number' && req.body.kilometraje > 0 ? null : "El kilometraje debe ser un número mayor que 0";
         errors.fecha_desde = validator.isISO8601(req.body.fecha_desde)? null : "La fecha de inicio del trabajo debe ser una fecha válida.. ";
         errors.fecha_hasta = validator.isISO8601(req.body.fecha_hasta) && req.body.fecha_hasta > req.body.fecha_desde? null : "La fecha de fin del trabajo debe ser una fecha válida y posterior a la fecha de inicio.";
 
@@ -35,7 +38,7 @@ const verifyTrabajo = async (req, res, next) => {
             errors.patente = "Patente inválida";
         }
 
-        if (req.body.id_proyecto === null || typeof req.body.id_proyecto === 'number') {
+        if (typeof(parseInt(req.body.id_proyecto)) === 'number') {
             if (req.body.id_proyecto !== null) {
                 const id_proyectoExists = await proyecto.findByPk(req.body.id_proyecto);
                 errors.id_proyecto = id_proyectoExists ? null : "El proyecto no existe";
@@ -63,7 +66,8 @@ const verifyTrabajo = async (req, res, next) => {
         }else{
             errors.dni_conductor = "Dni de conductor inválido";
         }
-    
+        
+        console.log(errors);
 
         if(Object.entries(errors).some((e) => e[1] != null)){
            return res.status(400).json(errors);

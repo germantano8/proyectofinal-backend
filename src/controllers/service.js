@@ -7,7 +7,7 @@ const serviceController = {
             const service = await Service.findAll();
             if(!service) return res.status(400).json({error: 'No hay Service'});
 
-            return res.status(200).json(await Service.findAll());
+            return res.status(200).json(service);
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }
