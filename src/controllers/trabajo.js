@@ -1,4 +1,5 @@
 const Trabajo = require('../models/trabajo');
+const {proyecto, cliente} = require('../models/');
 
 const trabajoController = {
 
@@ -7,7 +8,17 @@ const trabajoController = {
             const trabajo = await Trabajo.findAll({
                 order: [
                     ['id_trabajo', 'ASC']
-                ]
+                ],
+                include: [{
+                    model: proyecto,
+                    required:true,
+                    attributes: ['nombre']
+                },
+                {
+                    model: cliente,
+                    required:true,
+                    attributes: ['razon_social']
+                }]
             });
             if(!trabajo) return res.status(400).json({error: 'No hay trabajos'});
 
@@ -28,7 +39,6 @@ const trabajoController = {
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }
-        
     },
     create: async(req, res) => {
         try{

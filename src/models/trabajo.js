@@ -71,4 +71,8 @@ const trabajo = sequelize.define('trabajo', {
     }
 );
 
+trabajo.belongsTo(proyecto, { foreignKey: 'id_proyecto' });
+trabajo.belongsTo(conductor, { foreignKey: 'dni_conductor' });
+trabajo.belongsTo(cliente, { foreignKey: 'cuit_cliente' });
+
 module.exports = trabajo;
