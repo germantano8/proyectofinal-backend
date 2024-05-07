@@ -24,7 +24,6 @@ const conductorController = {
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }
-        
     },
     create: async(req, res) => {
         try{
