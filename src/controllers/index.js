@@ -1,13 +1,13 @@
 const controllers = {
-    tipoVehiculoController: require('./tipoVehiculoController'),
-    vehiculoController: require('./vehiculoController'),
-    conductorController: require('./conductorController'),
-    clienteController: require('./clienteController'),
-    serviceController: require('./serviceController'),
-    proyectoController: require('./proyectoController'),
-    reparacionController: require('./reparacionController'),
-    trabajoController: require('./trabajoController'),
-    usuarioController: require('./usuarioController')
+    tipoVehiculoController: require('./tipoVehiculo'),
+    vehiculoController: require('./vehiculo'),
+    conductorController: require('./conductor'),
+    clienteController: require('./cliente'),
+    serviceController: require('./service'),
+    proyectoController: require('./proyecto'),
+    reparacionController: require('./reparacion'),
+    trabajoController: require('./trabajo'),
+    usuarioController: require('./usuario')
 }
 
 module.exports = controllers;

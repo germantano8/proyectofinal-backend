@@ -73,6 +73,11 @@ const trabajo = sequelize.define('trabajo', {
 
 trabajo.belongsTo(proyecto, { foreignKey: 'id_proyecto' });
 trabajo.belongsTo(conductor, { foreignKey: 'dni_conductor' });
+conductor.hasMany(trabajo, {foreignKey: 'dni_conductor'});
+
 trabajo.belongsTo(cliente, { foreignKey: 'cuit_cliente' });
+
+trabajo.belongsTo(vehiculo, { foreignKey: 'patente' });
+vehiculo.hasMany(trabajo, {foreignKey: 'patente'});
 
 module.exports = trabajo;

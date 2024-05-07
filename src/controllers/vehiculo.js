@@ -38,24 +38,6 @@ const vehiculoController = {
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }
     },
-    getByTipoVehiculo: async(req,res) => {
-        try{
-            if(!req.params.id) return res.status(400).json({error: 'Falta id'});
-            const vehiculo = await Vehiculo.findAll({
-                where: {
-                    id_tipo_vehiculo: req.params.id
-                },
-            });
-
-            const patentes = vehiculo.map(v => v.patente);
-
-            if(!vehiculo) return res.status(404).json({error: 'Vehiculo no encontrado'});
-
-            return res.status(200).json(patentes);
-        }catch(e){
-            return res.status(500).json({error: 'Error al recuperar los datos'})
-        }
-    },
     create: async(req, res) => {
         try{
             const newvehiculo = await Vehiculo.create({
