@@ -1,4 +1,8 @@
 const Trabajo = require('../models/trabajo');
+const {proyecto, cliente, conductor, vehiculo} = require('../models/');
+const {vehiculoController} = require('./index');
+const {Op} = require('sequelize');
+const sequelize = require('../database/connection');
 
 const trabajoController = {
 
@@ -7,7 +11,17 @@ const trabajoController = {
             const trabajo = await Trabajo.findAll({
                 order: [
                     ['id_trabajo', 'ASC']
-                ]
+                ],
+                include: [{
+                    model: proyecto,
+                    required:true,
+                    attributes: ['nombre']
+                },
+                {
+                    model: cliente,
+                    required:true,
+                    attributes: ['razon_social']
+                }]
             });
             if(!trabajo) return res.status(400).json({error: 'No hay trabajos'});
 
@@ -28,7 +42,50 @@ const trabajoController = {
         }catch(err){
             return res.status(500).json({error: 'Error al recuperar los datos'});
         }
-        
+    },
+    getPorFechas: async(req, res) => {
+        try{
+            if(!req.query.tipo_vehiculo || !req.query.fecha_desde || !req.query.fecha_hasta){
+                return res.status(400).json({error: 'Faltan parámetros'});
+            }
+
+            const fechaDesde = new Date(req.query.fecha_desde);
+            const fechaHasta = new Date(req.query.fecha_hasta);
+
+            const patentesQuery = await sequelize.query(`
+            SELECT v.patente
+            FROM vehiculo v
+            WHERE v.patente NOT IN (
+            SELECT patente
+            FROM trabajo t
+            WHERE
+            (fecha_desde <= '${req.query.fecha_hasta}' AND fecha_hasta >= '${req.query.fecha_desde}')
+            OR (fecha_desde BETWEEN '${req.query.fecha_desde}' AND '${req.query.fecha_hasta}')
+            OR (fecha_hasta BETWEEN '${req.query.fecha_desde}' AND '${req.query.fecha_hasta}')
+            )
+            AND v.id_tipo_vehiculo = ${req.query.tipo_vehiculo};
+            `);
+
+            const conductoresQuery = await sequelize.query(`
+            SELECT c.dni
+            FROM conductor c
+            WHERE c.dni NOT IN (
+            SELECT dni_conductor
+            FROM trabajo t
+            WHERE
+            (fecha_desde <= '${req.query.fecha_hasta}' AND fecha_hasta >= '${req.query.fecha_desde}')
+            OR (fecha_desde BETWEEN '${req.query.fecha_desde}' AND '${req.query.fecha_hasta}')
+            OR (fecha_hasta BETWEEN '${req.query.fecha_desde}' AND '${req.query.fecha_hasta}')
+            );
+            `);
+
+            const patentes = Array.from(new Set(patentesQuery.flatMap(patenteArray => patenteArray.map(patenteObject => patenteObject.patente))));
+            const conductores = Array.from(new Set(conductoresQuery.flatMap(dniArray => dniArray.map(dniObject => dniObject.dni))));
+            
+            return res.json({patentes, conductores});
+        }catch(err){
+            return res.status(500).json({error: 'Error al recuperar los datos', message: err.message});
+        }
     },
     create: async(req, res) => {
         try{
