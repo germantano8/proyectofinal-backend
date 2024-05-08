@@ -1,7 +1,5 @@
 const Trabajo = require('../models/trabajo');
-const {proyecto, cliente, conductor, vehiculo} = require('../models/');
-const {vehiculoController} = require('./index');
-const {Op} = require('sequelize');
+const {proyecto, cliente} = require('../models/');
 const sequelize = require('../database/connection');
 
 const trabajoController = {
@@ -67,7 +65,7 @@ const trabajoController = {
             `);
 
             const conductoresQuery = await sequelize.query(`
-            SELECT c.dni
+            SELECT c.nombre, c.apellido, c.dni
             FROM conductor c
             WHERE c.dni NOT IN (
             SELECT dni_conductor
@@ -80,7 +78,7 @@ const trabajoController = {
             `);
 
             const patentes = Array.from(new Set(patentesQuery.flatMap(patenteArray => patenteArray.map(patenteObject => patenteObject.patente))));
-            const conductores = Array.from(new Set(conductoresQuery.flatMap(dniArray => dniArray.map(dniObject => dniObject.dni))));
+            const conductores = Array.from(new Set(conductoresQuery.flatMap(array => array)));
             
             return res.json({patentes, conductores});
         }catch(err){
