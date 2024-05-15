@@ -77,6 +77,17 @@ const vehiculoController = {
             return res.status(500).json({error: 'Error al actualizar la entidad'});
         }
     },
+    updateKm: async(req, res)=>{
+        try{
+            if(!req.params.id) return res.status(400).json({error: 'Falta patente'});
+            const vehiculo = await Vehiculo.findByPk(req.params.id);
+
+            await vehiculo.increment('kilometraje', {by: req.body.kilometraje});
+            return res.status(200).json({message: 'Kilometraje actualizado'});
+        }catch(err){
+            return res.status(500).json({error: 'Error al actualizar la entidad'});
+        }
+    },
     delete: async(req, res) => {
         try{
             if(!req.params.id) return res.status(400).json({error: 'Falta patente'});
